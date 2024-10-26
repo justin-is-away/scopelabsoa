@@ -1,21 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+ 
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --primary: 255 92% 76%;
+    --primary-foreground: 210 40% 98%;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    --secondary: 270 95% 75%;   
+    --secondary-foreground: 210 40% 98%;
+ 
+    --background: 0 0% 100%;
+    --foreground: 260 30% 20%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 260 30% 20%;
+    
+    --muted: 255 20% 97%;
+    --muted-foreground: 260 25% 35%;
+    
+    --accent: 255 30% 95%;
+    --accent-foreground: 260 30% 20%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 30% 20%;
+    
+    --border: 255 20% 92%;
+    --input: 255 20% 92%;
+    --ring: 255 92% 76%;
+
+    --success: 158 64% 52%;
+    --success-foreground: 210 40% 98%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --radius: 0.5rem;
+
+    --chart-1: 255 92% 76%;  
+    --chart-2: 270 95% 75%;    
+    --chart-3: 245 85% 70%;   
+    --chart-4: 280 75% 65%;    
+    --chart-5: 235 90% 70%;   
+  }
+
+  .dark {
+    --background: 260 30% 12%;
+    --foreground: 255 20% 93%;
+    
+    --card: 260 30% 14%;
+    --card-foreground: 255 20% 93%;
+    
+    --popover: 260 30% 14%;
+    --popover-foreground: 255 20% 93%;
+    
+    --primary: 255 92% 81%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 270 95% 80%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 260 30% 20%;
+    --muted-foreground: 255 20% 75%;
+    
+    --accent: 260 30% 20%;
+    --accent-foreground: 255 20% 93%;
+    
+    --border: 260 30% 20%;
+    --input: 260 30% 20%;
+    --ring: 255 92% 81%;
+
+    --chart-1: 255 92% 81%;
+    --chart-2: 270 95% 80%;
+    --chart-3: 245 85% 75%;
+    --chart-4: 280 75% 70%;
+    --chart-5: 235 90% 75%;
+  }
 }
