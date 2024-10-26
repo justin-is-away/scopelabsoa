@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const CommentForm = ({ 
   videoId,
@@ -18,21 +20,19 @@ const CommentForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-2 flex gap-2">
-      <input
-        type="text"
+    <form onSubmit={handleSubmit} className="space-y-2">
+      <Textarea
         value={newComment || ''}
         onChange={handleChange}
-        className="flex-1 px-2 py-1 border rounded"
         placeholder="Add a comment..."
+        className="resize-none"
       />
-      <button
+      <Button 
         type="submit"
-        className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={!newComment}
       >
-        Post
-      </button>
+        Post Comment
+      </Button>
     </form>
   );
 };

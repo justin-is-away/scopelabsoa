@@ -3,11 +3,11 @@ import CommentCard from './CommentCard';
 
 const CommentList = ({ comments }) => {
   if (!comments?.length) {
-    return <p className="text-gray-500 text-sm">No comments yet.</p>;
+    return <p className="text-sm text-muted-foreground">No comments yet.</p>;
   }
 
   return (
-    <div className="space-y-2 mb-4">
+    <div className="space-y-3">
       {comments.map((comment, index) => (
         <CommentCard 
           key={comment.id || index} 

@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { MessageCircle, User, ChevronDown, ChevronUp } from 'lucide-react';
 import VideoEditForm from './VideoEditForm';
 import { api } from '@/lib/api';
+import CommentList from './CommentList';
+import CommentForm from './CommentForm';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 
 const VideoCard = ({ 
   video, 
@@ -24,6 +25,8 @@ const VideoCard = ({
 }) => {
   const videoRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  
+  const commentText = comments.length === 1 ? 'comment' : 'comments';
   
   const isYouTubeUrl = (url) => {
     return url.includes('youtube.com') || url.includes('youtu.be');
@@ -47,7 +50,7 @@ const VideoCard = ({
 
   const handleEditSubmit = async (formData) => {
     try {
-      await api.editVideo(formData); 
+      await api.editVideo(formData);
       if (onVideoEdit) {
         await onVideoEdit();
       }
@@ -114,9 +117,15 @@ const VideoCard = ({
                     </p>
                   )}
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <User className="h-4 w-4" />
-                  <span>{video.user_id}</span>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>{video.user_id}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MessageCircle className="h-4 w-4" />
+                    <span>{comments.length} {commentText}</span>
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-2">
@@ -152,36 +161,17 @@ const VideoCard = ({
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <MessageCircle className="h-5 w-5 text-muted-foreground" />
-                  <h3 className="font-semibold">Comments ({comments.length})</h3>
+                  <h3 className="font-semibold">Comments ({comments.length} {commentText})</h3>
                 </div>
                 
                 <div className="space-y-4">
-                  {comments.map((comment) => (
-                    <div key={comment.id} className="space-y-1">
-                      <p className="text-sm font-medium">{comment.user_id}</p>
-                      <p className="text-sm text-muted-foreground">{comment.content}</p>
-                    </div>
-                  ))}
-                  
-                  <form onSubmit={(e) => {
-                    e.preventDefault();
-                    onCommentSubmit(videoId);
-                  }}>
-                    <div className="space-y-2">
-                      <Textarea
-                        value={newComment || ''}
-                        onChange={(e) => onCommentChange(videoId, e.target.value)}
-                        placeholder="Add a comment..."
-                        className="resize-none"
-                      />
-                      <Button 
-                        type="submit"
-                        disabled={!newComment}
-                      >
-                        Post Comment
-                      </Button>
-                    </div>
-                  </form>
+                  <CommentList comments={comments} />
+                  <CommentForm
+                    videoId={videoId}
+                    newComment={newComment}
+                    onCommentChange={onCommentChange}
+                    onCommentSubmit={onCommentSubmit}
+                  />
                 </div>
               </div>
             </CardContent>
